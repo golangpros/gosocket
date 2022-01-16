@@ -14,5 +14,5 @@ const (
 )
 
 const (
-	msgHeartBeat = iota
+	MsgHeartBeat = iota
 )
