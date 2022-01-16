@@ -35,7 +35,7 @@ func NewSocketService(laddr string) (*SocketService, error) {
 		hbInterval: 0 * time.Second,
 		hbTimeout:  0 * time.Second,
 		laddr:      laddr,
-		status:     Inited,
+		status:     STInited,
 		listener:   l,
 	}
 
@@ -56,11 +56,11 @@ func (s *SocketService) RegDisconnectHandler(handler func(*Session, error)) {
 
 func (s *SocketService) Serv() {
 
-	s.status = Running
+	s.status = STRunning
 	ctx, cancel := context.WithCancel(context.Background())
 
 	defer func() {
-		s.status = Stop
+		s.status = STStop
 		cancel()
 		s.listener.Close()
 	}()
@@ -90,7 +90,7 @@ func (s *SocketService) acceptHandler(ctx context.Context) {
 
 func (s *SocketService) connectHandler(ctx context.Context, c net.Conn) {
 	conn := NewConn(c, s.hbInterval, s.hbTimeout)
-	session := newSession(conn)
+	session := NewSession(conn)
 	s.sessions.Store(session.GetSessionID(), session)
 
 	connctx, cancel := context.WithCancel(ctx)
@@ -134,7 +134,7 @@ func (s *SocketService) Stop(reason string) {
 }
 
 func (s *SocketService) SetHeartBeat(hbInterval time.Duration, hbTimeout time.Duration) error {
-	if s.status == Running {
+	if s.status == STRunning {
 		return errors.New("Can't set heart beat on service running")
 	}
 
@@ -168,7 +168,6 @@ func (s *SocketService) Broadcast(msg *Message) {
 	s.sessions.Range(func(k, v interface{}) bool {
 		s := v.(*Session)
 		if err := s.GetConn().SendMessage(msg); err != nil {
-			// log.Println(err)
 		}
 		return true
 	})

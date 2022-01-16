@@ -7,12 +7,13 @@
 package gosocket
 
 const (
-	Unknown = iota
-	Inited
-	Running
-	Stop
+	STUnknown = iota
+	STInited
+	STRunning
+	STStop
 )
-
+ 
 const (
-	MsgHeartBeat = iota
+	MsgHeartbeat = iota
 )
+ 
