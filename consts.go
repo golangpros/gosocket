@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, GolangPros
+ * Copyright (c) 2022, GolangDevs
  *
  * SPDX-License-Identifier: BSD-2-Clause
  */
