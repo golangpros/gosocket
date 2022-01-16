@@ -20,3 +20,23 @@ func newSession(conn *Conn) *Session {
 
 	return session
 }
+
+func (s *Session) getSessionID() string {
+	return s.ID
+}
+
+func (s *Session) bindUserId(uid string) {
+	s.UID = uid
+}
+
+func (s *Session) getUserId() string {
+	return s.UID
+}
+
+func (s *Session) getConn() *Conn {
+	return s.conn
+}
+
+func (s *Session) setConn(conn *Conn) {
+	s.conn = conn
+}
