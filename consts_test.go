@@ -9,6 +9,6 @@ package gosocket
 import "fmt"
 
 func conststest() {
-	msg := msgHeartBeat
+	msg := MsgHeartBeat
 	fmt.Println(msg)
 }
