@@ -31,3 +31,18 @@ func NewConn(c net.Conn, hbInterval time.Duration, hbTimeout time.Duration) *Con
 	}
 	return conn
 }
+
+func (c *Conn) close() {
+	c.hbTimer.Stop()
+	c.rawConn.Close()
+}
+
+func (c *Conn) sendMessage(msg *Message) error {
+	pkg, err := Encode(msg)
+	if err != nil {
+		return err
+	}
+
+	c.sendCh <- pkg
+	return nil
+}
