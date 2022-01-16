@@ -79,7 +79,7 @@ func (c *Conn) writeCoroutine(ctx context.Context) {
 			}
 
 		case <-c.hbTimer.C:
-			hbMessage := NewMessage(msgHeartbeat, hbData)
+			hbMessage := NewMessage(MsgHeartBeat, hbData)
 			c.SendMessage(hbMessage)
 			if c.hbInterval > 0 {
 				c.hbTimer.Reset(c.hbInterval)
@@ -133,7 +133,7 @@ func (c *Conn) readCoroutine(ctx context.Context) {
 				continue
 			}
 
-			if msg.GetID() == msgHeartbeat {
+			if msg.GetID() == MsgHeartBeat {
 				continue
 			}
 
