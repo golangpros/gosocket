@@ -5,7 +5,7 @@ import (
 )
 
 type Session struct {
-	ID      string
+	ID       string
 	UID      string
 	conn     *Conn
 	settings map[string]interface{}
@@ -14,7 +14,7 @@ type Session struct {
 func newSession(conn *Conn) *Session {
 	id, _ := uuid.NewV4()
 	session := &Session{
-		ID:      id.String(),
+		ID:       id.String(),
 		UID:      "",
 		conn:     conn,
 		settings: make(map[string]interface{}),
