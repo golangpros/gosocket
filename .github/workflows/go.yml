@@ -23,9 +23,6 @@ jobs:
 
     - name: Build
       run: go mod tidy
-    
-    - name: Test
-      run: go test
       
   buildmacos:
     runs-on: macos-latest
@@ -42,6 +39,3 @@ jobs:
 
     - name: Build
       run: go mod tidy
-
-    - name: Test 
-      run: go test
